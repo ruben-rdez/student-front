@@ -1,0 +1,118 @@
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="student-form">
+    <div class="mb-3">
+      <label for="name" class="form-label" style="color: black; font-weight: bold; margin-bottom: 0px;">Name</label>
+      <input 
+        marg
+        type="text" 
+        style="height: 35px; margin-top: 0px; padding-top: 0px;"
+        class="form-control" 
+        id="name" 
+        formControlName="name"
+        [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+      >
+      <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+        <div *ngIf="f['name'].errors['required']">Name is required</div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="email" class="form-label" style="color: black; font-weight: bold; margin-bottom: 0px;">Email</label>
+      <input
+		type="email"
+        style="height: 35px; margin-top: 0px; padding-top: 0px;"
+        class="form-control" 
+        id="email" 
+        rows="3" 
+        formControlName="email"
+		pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.(com|in)$"
+		[ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+      >
+      <div *ngIf="submitted && f['email'].errors " class="invalid-feedback">
+        <div *ngIf="f['email'].errors['required']">Email is required</div>
+		<div *ngIf="f['email'].errors['pattern']">Enter a valid email</div>
+		
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="mobile" class="form-label" style="color: black; font-weight: bold; margin-bottom: 0px;">Mobile</label>
+      <input 
+        style="height: 35px; margin-top: 0px; padding-top: 0px;"
+        class="form-control" 
+        id="mobile" 
+        rows="3" 
+        maxlength="10"
+        formControlName="mobile"
+        pattern="\d*"
+        inputmode="numeric"
+        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+        placeholder="Enter numbers only"
+        [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }"
+      >
+      <div *ngIf="submitted && f['mobile'].errors" class="invalid-feedback">
+        <div *ngIf="f['mobile'].errors['required']">Mobile is required</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="mobile" class="form-label" style="color: black; font-weight: bold; margin-bottom: 0px;">Gender</label>
+      <input 
+        style="height: 35px; margin-top: 0px; padding-top: 0px;"
+        class="form-control" 
+        id="gender" 
+        rows="3" 
+        formControlName="gender"
+        [ngClass]="{ 'is-invalid': submitted && f['gender'].errors }"
+      >
+      <div *ngIf="submitted && f['gender'].errors" class="invalid-feedback">
+        <div *ngIf="f['gender'].errors['required']">Gender is required</div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="price" class="form-label" style="color: black; font-weight: bold; margin-bottom: 0px;">Age</label>
+      <div class="input-group">
+        <input 
+          type="text" 
+          style="height: 35px; margin-top: 0px; padding-top: 0px;"
+          class="form-control" 
+          id="age" 
+          maxlength="2"
+          formControlName="age" 
+          rows="3"
+          pattern="\d*"
+          inputmode="numeric"
+          onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+          placeholder="Enter numbers only"
+          [ngClass]="{ 'is-invalid': submitted && f['age'].errors }"
+        >
+        <div *ngIf="submitted && f['age'].errors" class="invalid-feedback">
+          <div *ngIf="f['age'].errors['required']">Age is required</div>
+          <div *ngIf="f['age'].errors['min']">Age must be greater than 0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="name" class="form-label" style="color: black; font-weight: bold; margin-bottom: 0px;">Nationality</label>
+      <input 
+        type="text" 
+        style="height: 35px; margin-top: 0px; padding-top: 0px; margin-bottom: 0px;"
+        class="form-control" 
+        id="nationality" 
+        formControlName="nationality" 
+        [ngClass]="{ 'is-invalid': submitted && f['nationality'].errors }"
+      >
+      <div *ngIf="submitted && f['nationality'].errors" class="invalid-feedback">
+        <div *ngIf="f['nationality'].errors['required']">Nationality is required</div>
+        <div *ngIf="f['nationality'].errors['minlength']">Nationality must be at least 2 characters</div>
+      </div>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary">{{ submitButtonText }}</button>
+      <!--<button type="button" class="btn btn-secondary" (click)="onReset()">Reset</button>-->
+      <button (click)="goToStudents()" class="btn btn-outline-secondary" style="background-color: black;">Cancel</button>
+
+    </div>
+  </form>

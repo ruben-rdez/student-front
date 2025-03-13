@@ -1,0 +1,41 @@
+<div class="container" style="margin-top:20px;width: 850px; margin-bottom: 0px; align-self: center;">
+    <h2 style="color: black;text-align: center;"><strong>Students</strong></h2>
+    <a routerLink="/students/new" class="btn btn-primary mb-1">New Student</a>
+    <div *ngIf="loading" class="alert alert-info">Loading Students...</div>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    <table *ngIf="students.length > 0" class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Gender</th>
+          <th>Age</th>
+          <th>Nationality</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students; trackBy: trackById">
+          <td>{{student.id}}</td>
+          <td>{{student.name}}</td>
+          <td>{{student.email}}</td>
+          <td>{{student.mobile}}</td>
+          <td>{{student.gender}}</td>
+          <td>{{student.age}}</td>
+          <td>{{student.nationality}}</td>
+          <td>
+            <!-- <a [routerLink]="['/students', student.id]" class="btn btn-sm btn-info me-2">View</a>-->
+            <a [routerLink]="['/students/edit', student.id]" class="btn btn-sm btn-warning me-2">Update</a>
+            <!--<a [routerLink]="['/students/delete', student.id]" class="btn btn-sm btn-danger me-2">Delete</a>-->
+            <button (click)="deleteStudent(student.id)" class="btn btn-sm btn-danger me-2">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="students.length === 0 && !loading" class="alert alert-warning">
+      No students found.
+    </div>
+  </div>

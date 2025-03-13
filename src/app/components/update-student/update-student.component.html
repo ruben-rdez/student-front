@@ -1,0 +1,24 @@
+<div class="container" style="width: 50%;">
+    <div class="card">
+      <div class="card-header">
+        <h2>Update Student</h2>
+      </div>
+      <div class="card-body">
+        <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+        <div *ngIf="loading" class="alert alert-info">Loading student data...</div>
+        <div *ngIf="saving" class="alert alert-info">Saving changes...</div>
+        
+        <ng-container *ngIf="student && !loading">
+          <app-student-form 
+            [student]="student"
+            [submitButtonText]="'Update'"
+            (formSubmit)="updateStudent($event)">
+          </app-student-form>
+        </ng-container>
+        
+        <div class="mt-3">
+          <!--<a [routerLink]="['/students']" class="btn btn-outline-secondary" style="background-color: black;">Cancel</a>-->
+        </div>
+      </div>
+    </div>
+  </div>
