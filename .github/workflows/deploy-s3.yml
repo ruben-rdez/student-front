@@ -1,0 +1,43 @@
+name: Deploy Angular App to AWS S3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x' # or whatever version you're using
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular app
+        run: ng build --configuration=production
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update && sudo apt-get install -y awscli
+          
+      - name: Configure AWS credentials
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region ${{ secrets.AWS_REGION }}
+
+      - name: Sync dist folder to S3 bucket
+        run: |
+          aws s3 sync dist/student-front s3://${{ secrets.AWS_S3_BUCKET }} --delete --acl public-read
+
+      - name: Output deployment URL
+        run: |
+          echo "App deployed to: http://${{ secrets.AWS_S3_BUCKET }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com"

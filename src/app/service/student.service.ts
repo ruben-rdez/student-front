@@ -13,7 +13,8 @@ interface ValidationErrorResponse {
   providedIn: 'root'
 })
 export class StudentService {
-  private apiUrl = 'http://localhost:8080/students';
+  //private apiUrl = 'http://localhost:8080/students';
+  private apiUrl = 'http://students-env.eba-i6cyz3p3.us-east-2.elasticbeanstalk.com/students';
 
   constructor(private http: HttpClient) { }
 
