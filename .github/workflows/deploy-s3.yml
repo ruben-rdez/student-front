@@ -16,7 +16,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.19.1' # or whatever version you're using
+          node-version: '22'
+          cache: 'npm' # or whatever version you're using
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli
