@@ -37,7 +37,7 @@ jobs:
 
       - name: Sync dist folder to S3 bucket
         run: |
-          aws s3 sync dist/student-front s3://${{ secrets.AWS_S3_BUCKET }} --delete --acl public-read
+          aws s3 sync dist/student-front s3://${{ secrets.AWS_S3_BUCKET }} --delete
 
       - name: Output deployment URL
         run: |
